@@ -198,31 +198,31 @@
         </entry>
         <entry>
           <prototype>Mine</prototype>
-          <number>1</number>
+          <number>3</number>
         </entry>
         <entry>
           <prototype>Mill</prototype>
-          <number>1</number>
+          <number>3</number>
         </entry>
         <entry>
           <prototype>Conversion</prototype>
-          <number>1</number>
+          <number>3</number>
         </entry>
         <entry>
           <prototype>Enrichment</prototype>
-          <number>1</number>
+          <number>3</number>
         </entry>
         <entry>
           <prototype>FuelFab</prototype>
-          <number>1</number>
+          <number>3</number>
         </entry>
         <entry>
           <prototype>WetStorage</prototype>
-          <number>1</number>
+          <number>3</number>
         </entry>
         <entry>
           <prototype>DryStorage</prototype>
-          <number>1</number>
+          <number>3</number>
         </entry>
       </initialfacilitylist>
       <config>

@@ -20,7 +20,7 @@ be imported into a notebook or another script.
 
 To run:
 ```
-python transition_metrics.py
+python create_AR_DeployInst.py
 ```
 Inputs: None
 
@@ -87,7 +87,7 @@ into a notebook or another script.
 
 To run:
 ```
-python transition_metrics.py
+python dataframe_analysis.py
 ```
 Inputs: None
 
@@ -122,7 +122,7 @@ in.
 
 To run:
 ```
-python transition_metrics.py
+python output_metrics.py
 ```
 Inputs: None
 
@@ -170,7 +170,8 @@ python test_analysis.py
 ``` 
 
 ### tests/test_create_AR_DeployInst.py
-testfile for `create_AR_DeployInst.py`, uses `ANO-1.xml`
+testfile for `create_AR_DeployInst.py`, uses `ANO-1.xml` and 
+`create_AR_DeployInst_testfile.xml`
 To run:
 ```
 pytest test_create_AR_DeployInst.py
@@ -183,7 +184,7 @@ To run:
 pytest test_dataframe_analysis.py
 ```
 
-###tests/test-Output_metrics.py
+### tests/test_output_metrics.py
 test file for `output_metrics.py`
 To run:
 ```

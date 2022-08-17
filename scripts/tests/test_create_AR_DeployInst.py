@@ -28,7 +28,7 @@ class Test_static_info(unittest.TestCase):
         here assume the modular file structure created by using
         `creat_cyclus_input.py`/.
         '''
-        self.test_file = 'output_metrics_testfile.xml'
+        self.test_file = 'create_AR_DeployInst_testfile.xml'
         self.deploy_inst_dict = {
             'DeployInst': {
                 'prototypes': {

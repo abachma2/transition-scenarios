@@ -12,7 +12,7 @@ to calculate and compare resource requirements of each fuel cycle
 scenario simulated. All of the figures created in the jupyter notebook
 are saved in the ``figures/`` directory. The notebooks are titled to describe 
 the scenarios analyzed in the notebook. ``analysis/initial_analysis.ipynb`` is the 
-analysis used to write [this article](https://doi.org/10.1051/epjn/2021021).
+analysis used to write `this article <https://doi.org/10.1051/epjn/2021021>`_.
 
 Inputs:
 ===========
@@ -62,10 +62,22 @@ Senitivity-analysis:
 ====================
 This directory contains work for sensitivity anlaysis on the scenarios developed 
 for this project. The sensitivity analysis is done by coupling |Cyclus| to Dakota.
-This directory has three subdirectories (`oat/`, `synergistic/`, `global/`) for 
+This directory has three subdirectories (``oat/``, ``synergistic/``, ``global/``) 
+for 
 each type of analysis performed. Each of those subdirectories contain more 
 subdirectories for each variable or set of variables changed in that set of 
 analysis. 
+
+To run the sensitivity analysis, go to the directory of interest (e.g., 
+``oat/lwr/``, then 
+.. code-block::
+   dakota dakota.in
+This requires that dakota is locally installed. the ``.out``, ``.rst``, and 
+``.dat`` files will be written to that directory (``oat/lwr/`` in this example) 
+and any |Cyclus| files (the input file, output database, and any DeployInst 
+files) will be written to the ``cyclus-files/`` directory (``oat/lwr/cyclus-files/``
+in this example).
+
 
 run_multiple_cyclus_inputs.bash 
 +++++++++++++++++++++++++++++++

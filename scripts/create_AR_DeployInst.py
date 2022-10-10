@@ -302,6 +302,70 @@ def determine_deployment_schedule(
 
     return deploy_schedule
 
+def deployment_schedule(       
+        power_gap,
+        reactor_prototypes,
+        share={'Xe-100':0.2, 'MMR':0.2,'VOYGR':0.6}):
+    '''
+    Define the deployment schedule for one or more
+    reactor prototypes based on a gap in production
+    and demand. If multiple prototypes are provided, then
+    they will be deployed in preferential order based on
+    decreasing power output. This function is used to 
+    specify a build share for all of the reactor 
+    prototypes at once. 
+
+    Parameters:
+    -----------
+    power_gap: array
+        gap in power production and demand
+    reactor_prototypes: dictionary
+        information about reactor prototypes to be deployed. The
+        keys are the prototype names (strs) and the values are
+        a tuple of the power output and lifetime (ints)
+    share: dictionary 
+        define the build share for each prototype. The keys are 
+        strings and the values are floats (percentage of share). 
+   
+
+    Returns:
+    --------
+    deploy_schedule: dict
+        deployment schedule of reactor prototypes with the
+        structure for a DeployInst
+    '''
+    deploy_schedule = {'DeployInst': {'prototypes': {'val': []},
+                                      'build_times': {'val': []},
+                                      'n_build': {'val': []},
+                                      'lifetimes': {'val': []}}}
+    reactors = reactor_prototypes.keys()
+    for index, value in enumerate(power_gap):
+        if value <= 0:
+            continue
+        num_rxs = share.copy()
+        for reactor in reactors:
+            required_share = value * (share[reactor])
+            print(index, value, reactor, share[reactor])
+            num_rxs[reactor] = math.ceil(
+                required_share /
+                reactor_prototypes[reactor][0]) 
+        for key in num_rxs:  
+            if num_rxs[key] <= 0:
+                continue
+            power_gap[index:index + reactor_prototypes[key][1]] = \
+            power_gap[index:index + reactor_prototypes[key]
+                        [1]] - reactor_prototypes[key][0] * num_rxs[key]
+            
+            deploy_schedule['DeployInst']['prototypes']['val'].append(
+                    reactor)
+            deploy_schedule['DeployInst']['n_build']['val'].append(num_rxs[key])
+            deploy_schedule['DeployInst']['build_times']['val'].append(index)
+            deploy_schedule['DeployInst']['lifetimes']['val'].append(
+                    reactor_prototypes[key][1])
+            value = value - reactor_prototypes[key][0] * num_rxs[key]
+
+    return deploy_schedule
+
 
 def write_deployinst(deploy_schedule, out_path):
     '''
@@ -418,8 +482,6 @@ def write_AR_deployinst(
                                               deployed_lwr_dict,
                                               duration)
     power_gap = determine_power_gap(deployed_power, demand_eq)
-    deploy_schedule = determine_deployment_schedule(power_gap,
-                                                    reactor_prototypes,
-                                                    reactor,
-                                                    build_share)
+    deploy_schedule = deployment_schedule(power_gap,
+                                          reactor_prototypes)
     return deploy_schedule

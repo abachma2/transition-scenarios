@@ -345,7 +345,6 @@ def deployment_schedule(
         num_rxs = share.copy()
         for reactor in reactors:
             required_share = value * (share[reactor])
-            print(index, value, reactor, share[reactor])
             num_rxs[reactor] = math.ceil(
                 required_share /
                 reactor_prototypes[reactor][0]) 
@@ -357,7 +356,7 @@ def deployment_schedule(
                         [1]] - reactor_prototypes[key][0] * num_rxs[key]
             
             deploy_schedule['DeployInst']['prototypes']['val'].append(
-                    reactor)
+                    key)
             deploy_schedule['DeployInst']['n_build']['val'].append(num_rxs[key])
             deploy_schedule['DeployInst']['build_times']['val'].append(index)
             deploy_schedule['DeployInst']['lifetimes']['val'].append(
